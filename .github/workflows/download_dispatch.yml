@@ -58,23 +58,13 @@ on:
         description: 上传文件名称
         required: false
 
-#      JM_USERNAME:
-#        type: string
-#        default: ''
-#        description: '禁漫帐号（不建议使用，用户名和密码会泄露在日志中。最好用secrets）'
-#        required: false
-#
-#      JM_PASSWORD:
-#        type: string
-#        default: ''
-#        description: '禁漫密码（不建议使用，用户名和密码会泄露在日志中。最好用secrets）'
-#        required: false
-
-
 jobs:
   crawler:
     runs-on: ubuntu-latest
     env:
+      # --- 关键新增：消除 Node.js 20 弃用警告 ---
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+      
       # 工作流输入
       JM_ALBUM_IDS: ${{ github.event.inputs.JM_ALBUM_IDS }}
       JM_PHOTO_IDS: ${{ github.event.inputs.JM_PHOTO_IDS }}
